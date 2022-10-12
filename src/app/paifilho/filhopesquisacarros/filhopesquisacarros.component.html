@@ -1,0 +1,28 @@
+<h2>Pesquisa de {{ tipoPesquisa }}</h2>
+<div class="row">
+  <div class="col">
+    <label for="pesquisa" class="col-12"
+      >Pesquisa de {{ tipoPesquisa }}:
+    </label>
+    <input
+      type="text"
+      id="pesquisa"
+      class="form-control mt-1 mb-2 col"
+      #termopesquisa
+      (input)="processaPesquisa(termopesquisa.value)"
+    />
+  </div>
+  <div class="col mt-4">
+    <input
+      type="button"
+      value="Pesquisar"
+      class="btn btn-outline-primary me-2"
+      (click)="processaPesquisa(termopesquisa.value)"
+    /><input
+      type="button"
+      value="Limpar pesquisa"
+      class="btn btn-outline-secondary"
+      (click)="limpaPesquisa(); termopesquisa.value = ''"
+    />
+  </div>
+</div>

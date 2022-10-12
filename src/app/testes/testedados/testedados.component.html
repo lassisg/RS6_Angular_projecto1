@@ -1,0 +1,82 @@
+<h1>Gestão de carros</h1>
+
+<!-- Usar apenas para debug -->
+<!-- <section>
+  <pre>{{ listaCarros | json }}</pre>
+</section> -->
+
+<p>
+  <label for="pesquisa">Pesquisa: </label>
+  <input
+    type="text"
+    id="pesquisa"
+    #termopesquisa
+    (input)="processaPesquisa(termopesquisa.value)"
+  /><input
+    type="button"
+    value="Pesquisar"
+    (click)="processaPesquisa(termopesquisa.value)"
+  /><input
+    type="button"
+    value="Limpar pesquisa"
+    (click)="limpaPesquisa(); termopesquisa.value = ''"
+  />
+</p>
+<p *ngIf="listaCarros.length === 0">Não existem carros na base de dados!</p>
+
+<table class="tabelaDados" *ngIf="listaCarros.length !== 0">
+  <thead>
+    <tr>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Ano</th>
+      <th>Disponível</th>
+      <th>Operações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- * indica uma diretiva estrutural, que gera código HTML -->
+    <tr *ngFor="let carro of listaCarros" id="{{ carro.id }}">
+      <td>{{ carro.marca }}</td>
+      <td>{{ carro.modelo }}</td>
+      <td>{{ carro.ano }}</td>
+      <!-- <td>{{ carro.disponivel }}</td> -->
+      <!-- <td>{{ carro.disponivel ? "&#10004;" : "&#10005;" }}</td> -->
+      <!-- &#10004; - true / &#10005; - false -->
+      <!-- <td *ngIf="carro.disponivel">&#10004;</td>
+            <td *ngIf="!carro.disponivel">&#10005;</td> -->
+      <!-- <td>
+                <span *ngIf="carro.disponivel">&#10004;</span>
+                <span *ngIf="!carro.disponivel">&#10005;</span>
+            </td> -->
+      <!-- <td>
+                <ng-container *ngIf="carro.disponivel">&#10004;</ng-container>
+                <ng-container *ngIf="!carro.disponivel">&#10005;</ng-container>
+            </td> -->
+      <!-- #naoDisponivel - template reference variable -->
+      <!-- <td>
+                <ng-container *ngIf="carro.disponivel; else naoDisponivel">&#10004;</ng-container>
+                <ng-template #naoDisponivel>&#10005;</ng-template>
+            </td> -->
+      <!-- <td>
+                <ng-container *ngIf="carro.disponivel; then disponivel; else naoDisponivel">ESTE CONTEÚDO NUNCA APARECE</ng-container>
+                <ng-template #disponivel>&#10004;</ng-template>
+                <ng-template #naoDisponivel>&#10005;</ng-template>
+            </td> -->
+      <td>
+        <ng-container [ngSwitch]="carro.disponivel">
+          <ng-container *ngSwitchCase="true">&#10004;</ng-container>
+          <ng-container *ngSwitchCase="false">&#10005;</ng-container>
+          <ng-container *ngSwitchDefault>-</ng-container>
+        </ng-container>
+      </td>
+      <td><button type="button" (click)="removeItem(carro.id!)">X</button></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">Total de carros:</td>
+      <td>{{ listaCarros.length }}</td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,27 @@
+<h2>Filtro de carros</h2>
+<p>
+  Disponível?
+
+  <input
+    type="radio"
+    id="disponivelSim"
+    class="form-check-input ms-2"
+    name="disponivel"
+    (click)="filtra('S')"
+  /><label for="disponivelSim" class="form-check-label ms-1">Sim</label>
+  <input
+    type="radio"
+    id="disponivelNao"
+    class="form-check-input ms-2"
+    name="disponivel"
+    (click)="filtra('N')"
+  /><label for="disponivelNao" class="form-check-label ms-1">Não</label>
+  <input
+    type="radio"
+    id="disponivelTodos"
+    class="form-check-input ms-2"
+    name="disponivel"
+    (click)="filtra('T')"
+    checked
+  /><label for="disponivelTodos" class="form-check-label ms-1">Todos</label>
+</p>

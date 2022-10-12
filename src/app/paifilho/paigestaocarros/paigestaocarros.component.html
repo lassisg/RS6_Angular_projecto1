@@ -1,0 +1,24 @@
+<h1>Gestão de carros</h1>
+
+<app-filhoinserecarro
+  [carro]="carroAltera"
+  (dadosCarro)="insertCar($event)"
+  (dadosCarroAlterado)="updateCar($event)"
+></app-filhoinserecarro>
+
+<app-filhopesquisacarros
+  [tipoPesquisa]="searchType"
+  (pesquisa)="efectuaPesquisa($event)"
+  (cleanSearchField)="cleanPesquisa()"
+></app-filhopesquisacarros>
+
+<app-filhofiltrocarros
+  (tipoFiltro)="filtraCarro($event)"
+></app-filhofiltrocarros>
+
+<app-filhotabelacarros
+  [listaCarros]="lista"
+  (elimina)="elCarro($event)"
+  (altera)="altCarro($event)"
+  (info)="mostraInfoCarro($event)"
+></app-filhotabelacarros>

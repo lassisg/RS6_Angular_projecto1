@@ -1,0 +1,78 @@
+<h2>Inserir um novo carro</h2>
+<div class="row">
+  <form [formGroup]="formCarros" (ngSubmit)="insereCarro()" class="col-6">
+    <p>
+      <label for="marca" class="form-label">Marca: </label
+      ><input
+        type="text"
+        name="marca"
+        id="marca"
+        class="form-control"
+        formControlName="marca"
+      />
+    </p>
+    <small
+      *ngIf="
+        formCarros.get('marca')?.touched && formCarros.get('marca')?.invalid
+      "
+      ><span *ngIf="formCarros.get('marca')?.hasError('required')"
+        >Campo de preenchimento obrigatório!</span
+      >
+      <span *ngIf="formCarros.get('marca')?.errors?.['pattern']"
+        >Mínimo 3 caracteres e máx 20 caracteres!</span
+      ></small
+    >
+    <p>
+      <label for="modelo" class="form-label">Modelo: </label
+      ><input
+        type="text"
+        name="modelo"
+        id="modelo"
+        class="form-control"
+        formControlName="modelo"
+      />
+    </p>
+    <p>
+      <label for="ano" class="form-label">Ano: </label
+      ><input
+        type="number"
+        name="ano"
+        id="ano"
+        class="form-control"
+        formControlName="ano"
+      />
+    </p>
+    <p>
+      <input
+        type="checkbox"
+        name="disponivel"
+        id="disponivel"
+        class="form-check-input"
+        formControlName="disponivel"
+      />
+      <label for="disponivel" class="form-check-label"
+        >&nbsp;Disponível:
+      </label>
+    </p>
+    <p>
+      <input
+        type="submit"
+        value="{{ emInsercao ? 'Inserir carro' : 'Alterar carro' }}"
+        class="btn btn-primary"
+        [disabled]="formCarros.invalid"
+      />
+    </p>
+  </form>
+  <div class="card col-6">
+    <pre>{{ formCarros.value | json }}</pre>
+    <pre>{{ formCarros.status | json }}</pre>
+    <pre>Valid: {{ formCarros.valid | json }}</pre>
+    <pre>Invalid: {{ formCarros.invalid | json }}</pre>
+    <pre>
+Campo 'marca' inválido: {{ formCarros.get("marca")?.invalid | json }}</pre
+    >
+    <pre>
+Campo 'marca' errors: {{ formCarros.get("marca")?.errors | json }}</pre
+    >
+  </div>
+</div>

@@ -1,3 +1,50 @@
-<h1>RE_Start</h1>
+<!-- <app-teste></app-teste> -->
+<!-- <app-testedados></app-testedados> -->
+<!-- <app-paigestaocarros></app-paigestaocarros> -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <ul class="top-menu navbar-nav">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink=""
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="teste" routerLinkActive="active"
+            >Teste</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/testedados" routerLinkActive="active"
+            >Testedados</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['carros']"
+            routerLinkActive="active"
+            >Carros</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
 
-<p>{{ title }}</p>
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <nav class="navbar fixed-bottom bg-light">
+    <div class="container">
+      <div class="container-fluid">&copy; 2022 Primavera Academy</div>
+    </div>
+  </nav>
+</footer>

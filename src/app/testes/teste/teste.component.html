@@ -1,0 +1,46 @@
+<h1>RE_Start</h1>
+
+<p id="texto">{{ title }}</p>
+<p id="texto">{{ title.toUpperCase() }}</p>
+<p>{{ mudaNome() }}</p>
+
+<!-- Pipes -->
+<p id="texto">Pipe uppercase: {{ title | uppercase }}</p>
+<p id="texto">Pipe lowercase: {{ title | lowercase }}</p>
+<p id="texto">Pipe titlecase: {{ title | titlecase }}</p>
+<p id="texto">Pipe slice: {{ title | slice: 0:5 }}</p>
+<p id="texto">Pipe uppercase + slice: {{ title | uppercase | slice: 0:5 }}</p>
+
+<p>{{ localidade }}</p>
+
+<p>O formador mora em Ermesinde? {{ formadorMoraEmErmesinde }}</p>
+<p>O formador mora em Ermesinde? {{ moraErmesinde() }}</p>
+<p>
+  O formador mora em Ermesinde?
+  {{ this.localidade == "Ermesinde" ? "Sim" : "Não" }}
+</p>
+
+<!-- <p><img src="../../../src/assets/landscape.jpg" /></p> -->
+<p><img src="assets/landscape.jpg" /></p>
+<p><img src="assets/{{ imagem }}" /></p>
+
+<!-- Poperty Binding -->
+<p><img [src]="imagem2" /></p>
+<p><img [src]="'assets/landscape.jpg'" /></p>
+
+<!-- Event Binding -->
+<p><button (click)="mudaImagem()">Mudar imagem</button></p>
+<p><button (click)="imagem = 'landscape2.jpg'">Mudar imagem</button></p>
+
+<p id="pBtCollapse">
+  <button (click)="mostraConteudo()">Mostrar conteúdo</button>
+</p>
+<!-- <section class="collapseContent {{ classe }}"> -->
+<section class="collapseContent" [hidden]="mostraCollapse">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid sed in quas
+    suscipit perferendis molestias animi maxime, corrupti recusandae corporis
+    praesentium iure consectetur molestiae vero. Animi suscipit dolores tempore
+    atque!
+  </p>
+</section>

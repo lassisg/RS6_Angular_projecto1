@@ -1,0 +1,84 @@
+<p *ngIf="listaCarros.length === 0">Não existem carros na base de dados!</p>
+
+<table class="table table-light tabelaDados" *ngIf="listaCarros.length !== 0">
+  <thead>
+    <tr>
+      <th (click)="ordenaPor('marca')">
+        <span class="me-2">Marca</span>
+        <i
+          *ngIf="currentSort === 'marca' && !sortAsc"
+          class="bi bi-arrow-up"
+        ></i>
+        <i
+          *ngIf="currentSort === 'marca' && sortAsc"
+          class="bi bi-arrow-down"
+        ></i>
+      </th>
+      <th (click)="ordenaPor('modelo')">
+        <span class="me-2">Modelo</span>
+        <i
+          *ngIf="currentSort === 'modelo' && !sortAsc"
+          class="bi bi-arrow-up"
+        ></i>
+        <i
+          *ngIf="currentSort === 'modelo' && sortAsc"
+          class="bi bi-arrow-down"
+        ></i>
+      </th>
+      <th (click)="ordenaPor('ano')">
+        <span class="me-2">Ano</span>
+        <i *ngIf="currentSort === 'ano' && !sortAsc" class="bi bi-arrow-up"></i>
+        <i
+          *ngIf="currentSort === 'ano' && sortAsc"
+          class="bi bi-arrow-down"
+        ></i>
+      </th>
+      <th (click)="ordenaPor('disponivel')">
+        <span class="me-2">Disponível</span>
+        <i
+          *ngIf="currentSort === 'disponivel' && !sortAsc"
+          class="bi bi-arrow-up"
+        ></i
+        ><i
+          *ngIf="currentSort === 'disponivel' && sortAsc"
+          class="bi bi-arrow-down"
+        ></i>
+      </th>
+      <th class="py-3"><span>Operações</span></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr
+      *ngFor="let carro of listaCarros"
+      id="{{ carro.id }}"
+      (click)="showInfoCarro(carro.id!, $event)"
+    >
+      <td>{{ carro.marca }}</td>
+      <td>{{ carro.modelo }}</td>
+      <td>{{ carro.ano }}</td>
+      <!-- <td>{{ carro.disponivel ? "&#10004;" : "&#10005;" }}</td> -->
+      <td>
+        <i *ngIf="carro.disponivel" class="bi bi-check"></i>
+        <i *ngIf="!carro.disponivel" class="bi bi-x"></i>
+      </td>
+      <td>
+        <a
+          class="table-action btn btn-light text-danger"
+          (click)="eliminaCarro(carro.id!, $event)"
+          ><i class="bi bi-x-square"></i
+        ></a>
+        <a
+          class="table-action btn btn-light text-primary"
+          (click)="alteraCarro(carro.id!, $event)"
+          ><i class="bi bi-pencil-square"></i
+        ></a>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">Total de carros:</td>
+      <td>{{ listaCarros.length }}</td>
+    </tr>
+  </tfoot>
+</table>

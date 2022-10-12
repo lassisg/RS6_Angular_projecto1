@@ -1,0 +1,10 @@
+<!-- <p><strong>Id:</strong> {{ id }}</p> -->
+<p><strong>Id:</strong> {{ carro.id }}</p>
+<p><strong>Marca:</strong> {{ carro.marca }}</p>
+<p><strong>Modelo:</strong> {{ carro.modelo }}</p>
+<p><strong>Ano:</strong> {{ carro.ano }}</p>
+<p>
+  <strong>Disponível:</strong>
+  <i *ngIf="carro.disponivel" class="bi bi-check"></i>
+  <i *ngIf="!carro.disponivel" class="bi bi-x"></i>
+</p>

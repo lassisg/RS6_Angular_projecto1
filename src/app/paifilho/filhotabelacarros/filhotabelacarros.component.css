@@ -1,0 +1,29 @@
+/* :host {
+  display: block;
+  border: 3px solid green;
+} */
+/* i.bi-x-square { */
+/* color: #f00; */
+/* } */
+/* i.bi-pencil-square {
+  color: #07f;
+} */
+/* a.table-action,
+a.sort {
+  padding: 5px;
+  margin: 0 2px;
+  border-radius: 5px;
+}
+a.table-action:hover,
+a.sort:hover {
+  cursor: pointer;
+}
+a.table-action:hover {
+  background: #eee;
+} */
+a.sort:hover {
+  cursor: pointer;
+}
+tbody tr {
+  cursor: pointer;
+}
