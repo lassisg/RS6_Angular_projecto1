@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Carro } from 'src/app/shared/carro';
-import { carros } from 'src/app/shared/carros';
+import { ServdadoscarrosService } from 'src/app/shared/servdadoscarros.service';
+// import { carros } from 'src/app/shared/carros';
 
 @Component({
   selector: 'app-paigestaocarros',
@@ -9,25 +10,28 @@ import { carros } from 'src/app/shared/carros';
   styleUrls: ['./paigestaocarros.component.css']
 })
 export class PaigestaocarrosComponent implements OnInit {
-  listaCarrosOriginal: Carro[] = carros;
+
+  // listaCarrosOriginal: Carro[] = carros;
+  listaCarros!: Carro[];
   lista: Carro[] = [];
   searchType: string = "carros";
   carroAltera!: Carro;
   pesquisaCorrente: string = "";
   filtroCorrente: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private servDados: ServdadoscarrosService) { }
 
   ngOnInit(): void {
+    this.listaCarros = this.servDados.getAllCars();
     this.resetList();
   }
 
   resetList() {
-    this.lista = this.listaCarrosOriginal.slice(0);
+    this.lista = this.listaCarros.slice(0);
   }
 
   elCarro(id: number) {
-    this.listaCarrosOriginal = this.listaCarrosOriginal.filter(objecto => objecto.id !== id);
+    this.listaCarros = this.listaCarros.filter(objecto => objecto.id !== id);
 
     this.resetList();
   }
@@ -73,7 +77,7 @@ export class PaigestaocarrosComponent implements OnInit {
   }
 
   filteredSearch() {
-    this.lista = this.listaCarrosOriginal.filter(objecto =>
+    this.lista = this.listaCarros.filter(objecto =>
       objecto.modelo.toUpperCase().includes(this.pesquisaCorrente.toUpperCase()) ||
       objecto.marca.toUpperCase().includes(this.pesquisaCorrente.toUpperCase()));
 
@@ -105,21 +109,22 @@ export class PaigestaocarrosComponent implements OnInit {
     // this.listaCarrosOriginal.push({...carro, id: ++maximo});
 
     // map traz sempre o mesmo nr de elementos do array!
-    carro.id = Math.max(...this.listaCarrosOriginal.map(carro => carro.id!)) + 1;
-    this.listaCarrosOriginal.push(carro);
+    // carro.id = Math.max(...this.listaCarros.map(carro => carro.id!)) + 1;
+    // this.listaCarros.push(carro);
+
+    this.servDados.insertCar(carro);
     this.resetList();
   }
 
   altCarro(id: number) {
     // console.log(id);
-    this.carroAltera = this.listaCarrosOriginal.filter(objecto => objecto.id === id)[0];
+    this.carroAltera = this.listaCarros.filter(objecto => objecto.id === id)[0];
   }
 
   updateCar(carro: Carro) {
-    let posicao = this.listaCarrosOriginal
+    let posicao = this.listaCarros
       .findIndex(registo => registo.id === carro.id);
-    this.listaCarrosOriginal[posicao] = carro;
-    this.resetList();
+    this.listaCarros[posicao] = carro;
     this.resetList();
   }
 

@@ -1,0 +1,51 @@
+<!-- <pre>{{ photoList | json }}</pre> -->
+<table class="table mt-4" *ngIf="photoList.length !== 0">
+  <thead>
+    <tr>
+      <th>Album</th>
+      <th>Title</th>
+      <!-- <th>Foto</th> -->
+      <th>Foto pequena</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let photo of photoList">
+      <td>{{ photo.albumId }}</td>
+      <td>{{ photo.title }}</td>
+      <!-- <td>{{ photo.url }}</td> -->
+      <!-- <td>{{ photo.thumbnailUrl }}</td> -->
+      <td><img src="{{ photo.thumbnailUrl }}" alt="" /></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">Total de fotos:</td>
+      <td>{{ photoList.length }}</td>
+    </tr>
+  </tfoot>
+</table>
+<!-- <p><button type="button">Next</button></p> -->
+<nav aria-label="Page navigation example" class="mb-4">
+  <ul class="pagination">
+    <li class="page-item">
+      <button
+        type="button"
+        class="page-link"
+        aria-label="Previous"
+        (click)="previousPage()"
+      >
+        <span aria-hidden="true">&laquo;</span>
+      </button>
+    </li>
+    <li class="page-item">
+      <button
+        type="button"
+        class="page-link"
+        aria-label="Next"
+        (click)="nextPage()"
+      >
+        <span aria-hidden="true">&raquo;</span>
+      </button>
+    </li>
+  </ul>
+</nav>

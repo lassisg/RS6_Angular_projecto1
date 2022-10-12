@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErroComponent } from './geral/erro/erro.component';
 import { HomeComponent } from './geral/home/home.component';
+import { PhotosComponent } from './jsonplaceholder/photos/photos.component';
 import { FilhoinfocarroComponent } from './paifilho/filhoinfocarro/filhoinfocarro.component';
 import { PaigestaocarrosComponent } from './paifilho/paigestaocarros/paigestaocarros.component';
 import { TesteComponent } from './testes/teste/teste.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "testedados", component: TestedadosComponent },
   { path: "carros", component: PaigestaocarrosComponent },
   { path: "carro/:id", component: FilhoinfocarroComponent },
+  { path: "photos", component: PhotosComponent },
   { path: "**", component: ErroComponent },
 ];
 
