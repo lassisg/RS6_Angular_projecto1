@@ -14,7 +14,15 @@ export class ServjsonplaceholderService {
   getPhotos(initial: number, itemsPerPage: number) {
     // returns an Observable of the HttpResponse, with a response body in the requested type.
     // <string> -> Generic
-    return this.http.get<Photo[]>(`${this.urlAPI}?_start=${initial}&_limit=${itemsPerPage}`);
+    return this.http.get<Photo[]>(
+      `${this.urlAPI}?_start=${initial}&_limit=${itemsPerPage}`,
+      { observe: 'response' });
+  }
+
+  searchPhotos(initial: number, itemsPerPage: number, searchTerm: string) {
+    return this.http.get<Photo[]>(
+      `${this.urlAPI}?title_like=${searchTerm}&_start=${initial}&_limit=${itemsPerPage}`,
+      { observe: 'response' });
   }
 
 }

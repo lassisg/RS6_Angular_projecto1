@@ -1,51 +1,146 @@
 <!-- <pre>{{ photoList | json }}</pre> -->
-<table class="table mt-4" *ngIf="photoList.length !== 0">
-  <thead>
-    <tr>
-      <th>Album</th>
-      <th>Title</th>
-      <!-- <th>Foto</th> -->
-      <th>Foto pequena</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let photo of photoList">
-      <td>{{ photo.albumId }}</td>
-      <td>{{ photo.title }}</td>
-      <!-- <td>{{ photo.url }}</td> -->
-      <!-- <td>{{ photo.thumbnailUrl }}</td> -->
-      <td><img src="{{ photo.thumbnailUrl }}" alt="" /></td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2">Total de fotos:</td>
-      <td>{{ photoList.length }}</td>
-    </tr>
-  </tfoot>
-</table>
-<!-- <p><button type="button">Next</button></p> -->
-<nav aria-label="Page navigation example" class="mb-4">
-  <ul class="pagination">
-    <li class="page-item">
-      <button
-        type="button"
-        class="page-link"
-        aria-label="Previous"
-        (click)="previousPage()"
-      >
-        <span aria-hidden="true">&laquo;</span>
-      </button>
-    </li>
-    <li class="page-item">
-      <button
-        type="button"
-        class="page-link"
-        aria-label="Next"
-        (click)="nextPage()"
-      >
-        <span aria-hidden="true">&raquo;</span>
-      </button>
-    </li>
-  </ul>
-</nav>
+<app-filhopesquisacarros
+  [tipoPesquisa]="searchType"
+  (pesquisa)="efectuaPesquisa($event)"
+  (cleanSearchField)="cleanPesquisa()"
+></app-filhopesquisacarros>
+
+<ng-container *ngIf="photoList.length !== 0">
+  <nav
+    aria-label="Page navigation"
+    class="d-flex justify-content-between align-items-center"
+  >
+    <p class="">Página {{ currentPage }} de {{ totalRecords }}</p>
+    <ul class="pagination">
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="First"
+          (click)="firstPage()"
+          [disabled]="start <= 0"
+        >
+          <span aria-hidden="true">FIRST</span>
+        </button>
+      </li>
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="Previous"
+          (click)="previousPage()"
+          [disabled]="start <= 0"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      <li class="page-item">
+        <span class="page-link" aria-hidden="true">&nbsp;</span>
+      </li>
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="Next"
+          (click)="nextPage()"
+          [disabled]="this.start >= this.totalRecords - this.itemsPerPage"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="First"
+          (click)="lastPage()"
+          [disabled]="this.start >= this.totalRecords - this.itemsPerPage"
+        >
+          <span aria-hidden="true">LAST</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Album</th>
+        <th>Title</th>
+        <!-- <th>Foto</th> -->
+        <th>Foto pequena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let photo of photoList">
+        <td>{{ photo.albumId }}</td>
+        <td>{{ photo.title }}</td>
+        <!-- <td>{{ photo.url }}</td> -->
+        <!-- <td>{{ photo.thumbnailUrl }}</td> -->
+        <td><img src="{{ photo.thumbnailUrl }}" alt="" /></td>
+      </tr>
+    </tbody>
+    <!-- <tfoot>
+      <tr>
+        <td colspan="2">Total de fotos:</td>
+        <td>{{ totalRecords }}</td>
+      </tr>
+    </tfoot> -->
+  </table>
+
+  <nav
+    aria-label="Page navigation"
+    class="d-flex justify-content-between align-items-center"
+  >
+    <p class="">Página {{ currentPage }} de {{ totalRecords }}</p>
+    <ul class="pagination">
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="First"
+          (click)="firstPage()"
+          [disabled]="start <= 0"
+        >
+          <span aria-hidden="true">FIRST</span>
+        </button>
+      </li>
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="Previous"
+          (click)="previousPage()"
+          [disabled]="start <= 0"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      <li class="page-item">
+        <span class="page-link" aria-hidden="true">&nbsp;</span>
+      </li>
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="Next"
+          (click)="nextPage()"
+          [disabled]="this.start >= this.totalRecords - this.itemsPerPage"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+      <li class="page-item">
+        <button
+          type="button"
+          class="page-link"
+          aria-label="First"
+          (click)="lastPage()"
+          [disabled]="this.start >= this.totalRecords - this.itemsPerPage"
+        >
+          <span aria-hidden="true">LAST</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</ng-container>
